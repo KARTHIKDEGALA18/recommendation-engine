@@ -1,11 +1,7 @@
 from fastapi import FastAPI
-import json
+from services.recommendation_service import get_recommendations
 
 app = FastAPI()
-
-# Load sample recommendation data
-with open("./data/sample_users.json", "r") as file:
-    recommendations_data = json.load(file)
 
 @app.get("/")
 def home():
@@ -14,12 +10,12 @@ def home():
 @app.get("/recommend/{user_id}")
 def recommend(user_id: int):
 
-    user_id = str(user_id)
+    recommendations = get_recommendations(user_id)
 
-    if user_id in recommendations_data:
+    if recommendations:
         return {
             "user_id": user_id,
-            "recommended_items": recommendations_data[user_id]
+            "recommended_items": recommendations
         }
 
     return {
