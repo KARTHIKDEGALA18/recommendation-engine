@@ -1,0 +1,31 @@
+{
+  "101": {
+    "name": "Black Hoodie",
+    "category": "Hoodie"
+  },
+
+  "102": {
+    "name": "White Sneakers",
+    "category": "Shoes"
+  },
+
+  "103": {
+    "name": "Blue Jeans",
+    "category": "Jeans"
+  },
+
+  "201": {
+    "name": "Red T-Shirt",
+    "category": "T-Shirt"
+  },
+
+  "202": {
+    "name": "Grey Jacket",
+    "category": "Jacket"
+  },
+
+  "203": {
+    "name": "Sports Shoes",
+    "category": "Shoes"
+  }
+}
