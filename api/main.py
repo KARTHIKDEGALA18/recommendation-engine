@@ -12,29 +12,35 @@ def home():
     return {"message": "Recommendation Engine API Running 🔥"}
 
 @app.get("/recommend/{user_id}")
-def recommend(user_id: int):
+def recommend(user_id: int, category: str = None):
 
     cached_data = get_cached_recommendations(user_id)
 
     if cached_data:
+        recommendations = cached_data
+    else:
+        recommendations = get_recommendations(user_id)
+
+        if recommendations:
+            set_cached_recommendations(user_id, recommendations)
+
+    if not recommendations:
         return {
-            "source": "cache",
-            "user_id": user_id,
-            "recommended_items": cached_data
+            "message": "User not found"
         }
 
-    recommendations = get_recommendations(user_id)
+    if category:
 
-    if recommendations:
+        filtered_products = []
 
-        set_cached_recommendations(user_id, recommendations)
+        for product in recommendations:
 
-        return {
-            "source": "database",
-            "user_id": user_id,
-            "recommended_items": recommendations
-        }
+            if product["category"].lower() == category.lower():
+                filtered_products.append(product)
+
+        recommendations = filtered_products
 
     return {
-        "message": "User not found"
+        "user_id": user_id,
+        "recommended_items": recommendations
     }
