@@ -1,3 +1,4 @@
+from services.analytics_service import get_analytics
 from fastapi import FastAPI
 from services.recommendation_service import get_recommendations
 from services.cache_service import (
@@ -44,3 +45,8 @@ def recommend(user_id: int, category: str = None):
         "user_id": user_id,
         "recommended_items": recommendations
     }
+
+@app.get("/analytics")
+def analytics():
+
+    return get_analytics()
