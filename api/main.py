@@ -1,10 +1,12 @@
-from services.analytics_service import get_analytics
 from fastapi import FastAPI
+
 from services.recommendation_service import get_recommendations
 from services.cache_service import (
     get_cached_recommendations,
     set_cached_recommendations
 )
+from services.analytics_service import get_analytics
+from services.similarity_service import get_similar_products
 
 app = FastAPI()
 
@@ -50,3 +52,13 @@ def recommend(user_id: int, category: str = None):
 def analytics():
 
     return get_analytics()
+
+@app.get("/similar/{product_id}")
+def similar_products(product_id: int):
+
+    similar_items = get_similar_products(product_id)
+
+    return {
+        "product_id": product_id,
+        "similar_products": similar_items
+    }

@@ -26,4 +26,3 @@ def get_analytics():
         "total_products": total_products,
         "categories": categories
     }
-    
