@@ -3,8 +3,8 @@ import json
 with open("./data/sample_users.json", "r") as file:
     recommendations_data = json.load(file)
 
-with open("./data/products.json", "r") as file:
-    products_data = json.load(file)
+with open("./data/movies.json", "r") as file:
+    movies_data = json.load(file)
 
 def get_recommendations(user_id):
 
@@ -13,20 +13,20 @@ def get_recommendations(user_id):
     if user_id not in recommendations_data:
         return []
 
-    recommended_products = []
+    recommended_movies = []
 
-    for product_id in recommendations_data[user_id]:
+    for movie_id in recommendations_data[user_id]:
 
-        product_id = str(product_id)
+        movie_id = str(movie_id)
 
-        if product_id in products_data:
+        if movie_id in movies_data:
 
-            product = {
-                "id": product_id,
-                "name": products_data[product_id]["name"],
-                "category": products_data[product_id]["category"]
+            movie = {
+                "id": movie_id,
+                "title": movies_data[movie_id]["title"],
+                "genre": movies_data[movie_id]["genre"]
             }
 
-            recommended_products.append(product)
+            recommended_movies.append(movie)
 
-    return recommended_products
+    return recommended_movies

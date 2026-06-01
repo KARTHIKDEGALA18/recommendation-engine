@@ -6,16 +6,16 @@ from services.cache_service import (
     set_cached_recommendations
 )
 from services.analytics_service import get_analytics
-from services.similarity_service import get_similar_products
+from services.similarity_service import get_similar_movies
 
 app = FastAPI()
 
 @app.get("/")
 def home():
-    return {"message": "Recommendation Engine API Running 🔥"}
+    return {"message": "Movie Recommendation Engine API Running 🎬"}
 
 @app.get("/recommend/{user_id}")
-def recommend(user_id: int, category: str = None):
+def recommend(user_id: int, genre: str = None):
 
     cached_data = get_cached_recommendations(user_id)
 
@@ -32,20 +32,20 @@ def recommend(user_id: int, category: str = None):
             "message": "User not found"
         }
 
-    if category:
+    if genre:
 
-        filtered_products = []
+        filtered_movies = []
 
-        for product in recommendations:
+        for movie in recommendations:
 
-            if product["category"].lower() == category.lower():
-                filtered_products.append(product)
+            if movie["genre"].lower() == genre.lower():
+                filtered_movies.append(movie)
 
-        recommendations = filtered_products
+        recommendations = filtered_movies
 
     return {
         "user_id": user_id,
-        "recommended_items": recommendations
+        "recommended_movies": recommendations
     }
 
 @app.get("/analytics")
@@ -53,12 +53,17 @@ def analytics():
 
     return get_analytics()
 
-@app.get("/similar/{product_id}")
-def similar_products(product_id: int):
+@app.get("/similar/{movie_id}")
+def similar_movies(movie_id: int):
 
-    similar_items = get_similar_products(product_id)
+    similar_items = get_similar_movies(movie_id)
+
+    if not similar_items:
+        return {
+            "error": "Movie not found"
+        }
 
     return {
-        "product_id": product_id,
-        "similar_products": similar_items
+        "movie_id": movie_id,
+        "similar_movies": similar_items
     }

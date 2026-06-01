@@ -1,4 +1,4 @@
-similar_products_data = {
+similar_movies_data = {
 
     "101": ["102", "103"],
     "102": ["101", "103"],
@@ -9,12 +9,12 @@ similar_products_data = {
     "203": ["201", "202"]
 }
 
-def get_similar_products(product_id):
+def get_similar_movies(movie_id):
 
-    product_id = str(product_id)
+    movie_id = str(movie_id)
 
-    if product_id in similar_products_data:
+    if movie_id in similar_movies_data:
 
-        return similar_products_data[product_id]
+        return similar_movies_data[movie_id]
 
     return []

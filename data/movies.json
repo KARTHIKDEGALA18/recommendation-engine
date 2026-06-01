@@ -1,0 +1,31 @@
+{
+  "101": {
+    "title": "Inception",
+    "genre": "Sci-Fi"
+  },
+
+  "102": {
+    "title": "Interstellar",
+    "genre": "Sci-Fi"
+  },
+
+  "103": {
+    "title": "The Dark Knight",
+    "genre": "Action"
+  },
+
+  "201": {
+    "title": "Avatar",
+    "genre": "Fantasy"
+  },
+
+  "202": {
+    "title": "Titanic",
+    "genre": "Romance"
+  },
+
+  "203": {
+    "title": "Joker",
+    "genre": "Drama"
+  }
+}
